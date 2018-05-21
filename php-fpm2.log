@@ -1,0 +1,21 @@
+[21-May-2018 08:40:10] NOTICE: child 30229 stopped for tracing
+[21-May-2018 08:40:10] NOTICE: about to trace 30229
+[21-May-2018 08:40:10] ERROR: failed to ptrace(PEEKDATA) pid 30229: Input/output error (5)
+[21-May-2018 08:40:10] NOTICE: finished trace of 30229
+[21-May-2018 08:40:17] WARNING: [pool ciccio] child 30245, script '/home/ciccio/ciccio.ogino.net/www/index.php' (request: "POST /index.php") executing too slow (5.414265 sec), logging
+[21-May-2018 08:40:17] NOTICE: child 30245 stopped for tracing
+[21-May-2018 08:40:17] NOTICE: about to trace 30245
+[21-May-2018 08:40:17] NOTICE: finished trace of 30245
+[21-May-2018 08:40:19] WARNING: [pool ciccio] child 30236, script '/home/ciccio/ciccio.ogino.net/www/index.php' (request: "POST /index.php") executing too slow (6.602892 sec), logging
+[21-May-2018 08:40:19] NOTICE: child 30236 stopped for tracing
+[21-May-2018 08:40:19] NOTICE: about to trace 30236
+[21-May-2018 08:40:19] ERROR: failed to ptrace(PEEKDATA) pid 30236: Input/output error (5)
+[21-May-2018 08:40:19] NOTICE: finished trace of 30236
+[21-May-2018 08:40:22] WARNING: [pool ciccio] child 30250, script '/home/ciccio/ciccio.ogino.net/www/index.php' (request: "POST /index.php") executing too slow (6.100344 sec), logging
+[21-May-2018 08:40:22] WARNING: [pool ciccio] child 30242, script '/home/ciccio/ciccio.ogino.net/www/index.php' (request: "POST /index.php") executing too slow (6.297497 sec), logging
+[21-May-2018 08:40:22] WARNING: [pool ciccio] child 30239, script '/home/ciccio/ciccio.ogino.net/www/index.php' (request: "POST /index.php") executing too slow (6.287957 sec), logging
+[21-May-2018 08:40:22] WARNING: [pool ciccio] child 30232, script '/home/ciccio/ciccio.ogino.net/www/index.php' (request: "POST /index.php") executing too slow (6.296828 sec), logging
+[21-May-2018 08:40:22] NOTICE: child 30232 stopped for tracing
+[21-May-2018 08:40:22] NOTICE: about to trace 30232
+[21-May-2018 08:40:22] ERROR: failed to ptrace(PEEKDATA) pid 30232: Input/output error (5)
+[21-May-2018 08:40:22] NOTICE: finished trace of 30232
