@@ -1,0 +1,27 @@
+2018-05-21 06:00:02 UTC [29170-1] anna@anna ERROR:  invalid input syntax for integer: ".." at character 42
+2018-05-21 06:00:02 UTC [29170-2] anna@anna STATEMENT:  UPDATE documenti SET id_maniglia = '..'
+					WHERE id_porta  = 136027
+2018-05-21 06:00:02 UTC [29170-3] anna@anna ERROR:  invalid input syntax for integer: ".." at character 42
+2018-05-21 06:00:02 UTC [29170-4] anna@anna STATEMENT:  UPDATE documenti SET id_maniglia = '..'
+					WHERE id_porta  = 137859
+2018-05-21 06:00:02 UTC [29170-5] anna@anna ERROR:  invalid input syntax for integer: ".." at character 42
+2018-05-21 06:00:02 UTC [29170-6] anna@anna STATEMENT:  UPDATE documenti SET id_maniglia = '..'
+					WHERE id_porta  = 157174
+2018-05-21 06:00:02 UTC [29170-7] anna@anna ERROR:  invalid input syntax for integer: ".." at character 42
+2018-05-21 06:00:02 UTC [29170-8] anna@anna STATEMENT:  UPDATE documenti SET id_maniglia = '..'
+					WHERE id_porta  = 157572
+2018-05-21 06:00:02 UTC [29170-9] anna@anna ERROR:  invalid input syntax for integer: ".." at character 42
+2018-05-21 06:00:02 UTC [29170-10] anna@anna STATEMENT:  UPDATE documenti SET id_maniglia = '..'
+					WHERE id_porta  = 157375
+2018-05-21 06:00:02 UTC [29170-11] anna@anna ERROR:  invalid input syntax for integer: ".." at character 42
+2018-05-21 06:00:02 UTC [29170-12] anna@anna STATEMENT:  UPDATE documenti SET id_maniglia = '..'
+					WHERE id_porta  = 157539
+2018-05-21 06:00:02 UTC [29170-13] anna@anna ERROR:  invalid input syntax for integer: ".." at character 42
+2018-05-21 06:00:02 UTC [29170-14] anna@anna STATEMENT:  UPDATE documenti SET id_maniglia = '..'
+					WHERE id_porta  = 159059
+2018-05-21 06:00:02 UTC [29170-15] anna@anna ERROR:  invalid input syntax for integer: ".." at character 42
+2018-05-21 06:00:02 UTC [29170-16] anna@anna STATEMENT:  UPDATE documenti SET id_maniglia = '..'
+					WHERE id_porta  = 157776
+2018-05-21 06:00:02 UTC [29170-17] anna@anna ERROR:  invalid input syntax for integer: ".." at character 42
+2018-05-21 06:00:02 UTC [29170-18] anna@anna STATEMENT:  UPDATE documenti SET id_maniglia = '..'
+					WHERE id_porta  = 180810 = 218103
