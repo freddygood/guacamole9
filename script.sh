@@ -8,7 +8,7 @@ function usage() {
 unset -v GO_ARGS GO_TYPE GO_FILE
 unset -v GO_LOG_FORMAT GO_TIME_FORMAT GO_DATE_FORMAT
 
-while getopts ":t:f:A:h" opt; do
+while getopts ":t:f:A:h:z:n" opt; do
 	case $opt in
 		't')
 			GO_TYPE=$OPTARG
@@ -18,6 +18,12 @@ while getopts ":t:f:A:h" opt; do
 			;;
 		'A')
 			GO_ARGS=$OPTARG
+			;;
+		'z')
+			GUNZIP=true
+			;;
+		'n')
+			ANONIMYZE=true
 			;;
 		'h')
 			usage
@@ -35,13 +41,37 @@ done
 
 case $GO_TYPE in
 	'apache')
-		echo "Run command: goaccess --log-format=COMBINED $GO_FILE"
-		goaccess --log-format=COMBINED $GO_FILE
+		if [ "$GUNZIP" ]; then
+			gunzip -c $GO_FILE | goaccess --log-format=COMBINED $GO_ARGS -
+		else
+			goaccess --log-format=COMBINED $GO_ARGS $GO_FILE
+		fi
 		;;
+
 	'php')
-		echo "Sed command: sed -E 's|^(\[.{20}\]) (.*)$|\1 127.0.0.1 {{\2}}|g' $GO_FILE"
-		echo "Goaccess command: goaccess --log-format=\"[%d %t] %h {{%r}}\" --date-format=\"%d-%b-%Y\" --time-format=\"%H:%M:%S\" -"
-		sed -E 's|^(\[.{20}\]) (.*)$|\1 127.0.0.1 {{\2}}|g' $GO_FILE | goaccess --log-format="[%d %t] %h {{%r}}" --date-format="%d-%b-%Y" --time-format="%H:%M:%S" -
+		if [ "$GUNZIP" ]; then
+			if [ "$ANONIMYZE" ]; then
+				gunzip -c $GO_FILE | sed -E \
+					-e 's/(child|pid|trace|trace\ of) [0-9]{1,5}/\1 xxxxx/g' \
+					-e 's/slow \([0-9\.]* sec\)/slow (x.xxx sec)/g' \
+					-e 's|^(\[.{20}\]) (.*)$|\1 127.0.0.1 {{\2}}|g' | \
+						goaccess --log-format="[%d %t] %h {{%r}}" --date-format="%d-%b-%Y" --time-format="%H:%M:%S" -
+			else
+				gunzip -c $GO_FILE | sed -E 's|^(\[.{20}\]) (.*)$|\1 127.0.0.1 {{\2}}|g' | \
+					goaccess --log-format="[%d %t] %h {{%r}}" --date-format="%d-%b-%Y" --time-format="%H:%M:%S" -
+			fi
+		else
+			if [ "$ANONIMYZE" ]; then
+				sed -E \
+					-e 's/(child|pid|trace|trace\ of) [0-9]{1,5}/\1 xxxxx/g' \
+					-e 's/slow \([0-9\.]* sec\)/slow (x.xxx sec)/g' \
+					-e 's|^(\[.{20}\]) (.*)$|\1 127.0.0.1 {{\2}}|g' $GO_FILE | \
+						goaccess --log-format="[%d %t] %h {{%r}}" --date-format="%d-%b-%Y" --time-format="%H:%M:%S" -
+			else
+				sed -E 's|^(\[.{20}\]) (.*)$|\1 127.0.0.1 {{\2}}|g' $GO_FILE | \
+					goaccess --log-format="[%d %t] %h {{%r}}" --date-format="%d-%b-%Y" --time-format="%H:%M:%S" -
+			fi
+		fi
 		;;
 	'psql'|'postgres')
 		GO_LOG_FORMAT=''
