@@ -44,7 +44,7 @@ case $GO_TYPE in
 		if [ "$GUNZIP" ]; then
 			gunzip -c $GO_FILE | goaccess --log-format=COMBINED $GO_ARGS -
 		else
-			goaccess --log-format=COMBINED $GO_ARGS $GO_FILE
+			cat $GO_FILE | goaccess --log-format=COMBINED $GO_ARGS -
 		fi
 		;;
 
