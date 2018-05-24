@@ -73,6 +73,35 @@ case $GO_TYPE in
 			fi
 		fi
 		;;
+
+	'error')
+		if [ "$GUNZIP" ]; then
+			if [ "$ANONIMYZE" ]; then
+				gunzip -c $GO_FILE | sed -E \
+					-e 's/^(.*) (\[.*), client: (.*), server: (.*), request: "(.*)", upstream: "(.*)", host: "([a-z0-9\.-_]*)"(, referrer: "(.*)")?$/\1 \3 \4 \7 "\9" {{\2 \5}}/g' \
+					-e 's/ [0-9]{1,5}#[0-9]: / xxxxx#x: /g' \
+					-e 's/ \*[0-9]{1,9} / *xxxxx /g' \
+						| goaccess --log-format="%d %t %h %v %^ \"%R\" {{%r}}" --date-format="%Y/%m/%d" --time-format="%H:%M:%S" -
+			else
+				gunzip -c $GO_FILE | sed -E \
+					-e 's/^(.*) (\[.*), client: (.*), server: (.*), request: "(.*)", upstream: "(.*)", host: "([a-z0-9\.-_]*)"(, referrer: "(.*)")?$/\1 \3 \4 \7 "\9" {{\2 \5}}/g' \
+						| goaccess --log-format="%d %t %h %v %^ \"%R\" {{%r}}" --date-format="%Y/%m/%d" --time-format="%H:%M:%S" -
+			fi
+		else
+			if [ "$ANONIMYZE" ]; then
+				cat $GO_FILE | sed -E \
+					-e 's/^(.*) (\[.*), client: (.*), server: (.*), request: "(.*)", upstream: "(.*)", host: "([a-z0-9\.-_]*)"(, referrer: "(.*)")?$/\1 \3 \4 \7 "\9" {{\2 \5}}/g' \
+					-e 's/ [0-9]{1,5}#[0-9]: / xxxxx#x: /g' \
+					-e 's/ \*[0-9]{1,9} / *xxxxx /g' \
+						| goaccess --log-format="%d %t %h %v %^ \"%R\" {{%r}}" --date-format="%Y/%m/%d" --time-format="%H:%M:%S" -
+			else
+				cat $GO_FILE | sed -E \
+					-e 's/^(.*) (\[.*), client: (.*), server: (.*), request: "(.*)", upstream: "(.*)", host: "([a-z0-9\.-_]*)"(, referrer: "(.*)")?$/\1 \3 \4 \7 "\9" {{\2 \5}}/g' \
+						| goaccess --log-format="%d %t %h %v %^ \"%R\" {{%r}}" --date-format="%Y/%m/%d" --time-format="%H:%M:%S" -
+			fi
+		fi
+		;;
+
 	'psql'|'postgres')
 		GO_LOG_FORMAT=''
 		GO_DATE_FORMAT='%Y-%b-%d'
