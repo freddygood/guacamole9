@@ -54,22 +54,22 @@ case $GO_TYPE in
 				gunzip -c $GO_FILE | sed -E \
 					-e 's/(child|pid|trace|trace\ of) [0-9]{1,5}/\1 xxxxx/g' \
 					-e 's/slow \([0-9\.]* sec\)/slow (x.xxx sec)/g' \
-					-e 's|^(\[.{20}\]) (.*)$|\1 127.0.0.1 {{\2}}|g' | \
-						goaccess --log-format="[%d %t] %h {{%r}}" --date-format="%d-%b-%Y" --time-format="%H:%M:%S" -
+					-e 's|^(\[.{20}\]) (.*)$|\1 127.0.0.1 {{\2}}|g' \
+						| goaccess --log-format="[%d %t] %h {{%r}}" --date-format="%d-%b-%Y" --time-format="%H:%M:%S" -
 			else
-				gunzip -c $GO_FILE | sed -E 's|^(\[.{20}\]) (.*)$|\1 127.0.0.1 {{\2}}|g' | \
-					goaccess --log-format="[%d %t] %h {{%r}}" --date-format="%d-%b-%Y" --time-format="%H:%M:%S" -
+				gunzip -c $GO_FILE | sed -E 's|^(\[.{20}\]) (.*)$|\1 127.0.0.1 {{\2}}|g' \
+					| goaccess --log-format="[%d %t] %h {{%r}}" --date-format="%d-%b-%Y" --time-format="%H:%M:%S" -
 			fi
 		else
 			if [ "$ANONIMYZE" ]; then
-				sed -E \
+				cat $GO_FILE | sed -E \
 					-e 's/(child|pid|trace|trace\ of) [0-9]{1,5}/\1 xxxxx/g' \
 					-e 's/slow \([0-9\.]* sec\)/slow (x.xxx sec)/g' \
-					-e 's|^(\[.{20}\]) (.*)$|\1 127.0.0.1 {{\2}}|g' $GO_FILE | \
-						goaccess --log-format="[%d %t] %h {{%r}}" --date-format="%d-%b-%Y" --time-format="%H:%M:%S" -
+					-e 's|^(\[.{20}\]) (.*)$|\1 127.0.0.1 {{\2}}|g' \
+						| goaccess --log-format="[%d %t] %h {{%r}}" --date-format="%d-%b-%Y" --time-format="%H:%M:%S" -
 			else
-				sed -E 's|^(\[.{20}\]) (.*)$|\1 127.0.0.1 {{\2}}|g' $GO_FILE | \
-					goaccess --log-format="[%d %t] %h {{%r}}" --date-format="%d-%b-%Y" --time-format="%H:%M:%S" -
+				cat $GO_FILE | sed -E 's|^(\[.{20}\]) (.*)$|\1 127.0.0.1 {{\2}}|g' \
+					| goaccess --log-format="[%d %t] %h {{%r}}" --date-format="%d-%b-%Y" --time-format="%H:%M:%S" -
 			fi
 		fi
 		;;
